@@ -26,6 +26,12 @@ YOUR_IPSEC_PSK=''
 YOUR_USERNAME=''
 YOUR_PASSWORD=''
 
+HE_USERNAME='Trump'
+HE_PASSWORD='trumpIsCrazy666'
+
+HER_USERNAME='Harry'
+HER_PASSWORD='ISupportHarry'
+
 # Important notes:   https://git.io/vpnnotes
 # Setup VPN clients: https://git.io/vpnclients
 
@@ -65,6 +71,12 @@ fi
 [ -n "$YOUR_IPSEC_PSK" ] && VPN_IPSEC_PSK="$YOUR_IPSEC_PSK"
 [ -n "$YOUR_USERNAME" ] && VPN_USER="$YOUR_USERNAME"
 [ -n "$YOUR_PASSWORD" ] && VPN_PASSWORD="$YOUR_PASSWORD"
+
+[ -n "$YOUR_USERNAME" ] && VPN_USER1="$YOUR_USERNAME"
+[ -n "$YOUR_PASSWORD" ] && VPN_PASSWORD1="$YOUR_PASSWORD"
+
+[ -n "$YOUR_USERNAME" ] && VPN_USER2="$YOUR_USERNAME"
+[ -n "$YOUR_PASSWORD" ] && VPN_PASSWORD2="$YOUR_PASSWORD"
 
 if [ -z "$VPN_IPSEC_PSK" ] && [ -z "$VPN_USER" ] && [ -z "$VPN_PASSWORD" ]; then
   echo "VPN credentials not set by user. Generating random PSK and password..."
@@ -280,12 +292,18 @@ cat > /etc/ppp/chap-secrets <<EOF
 # Secrets for authentication using CHAP
 # client  server  secret  IP addresses
 "$VPN_USER" l2tpd "$VPN_PASSWORD" *
+"$VPN_USER1" l2tpd "$VPN_PASSWORD1" *
+"$VPN_USER2" l2tpd "$VPN_PASSWORD2" *
 EOF
 
 /bin/cp -f /etc/ipsec.d/passwd "/etc/ipsec.d/passwd.old-$sys_dt" 2>/dev/null
 VPN_PASSWORD_ENC=$(openssl passwd -1 "$VPN_PASSWORD")
+VPN_PASSWORD_ENC1=$(openssl passwd -1 "$VPN_PASSWORD1")
+VPN_PASSWORD_ENC2=$(openssl passwd -1 "$VPN_PASSWORD2")
 cat > /etc/ipsec.d/passwd <<EOF
 $VPN_USER:$VPN_PASSWORD_ENC:xauth-psk
+$VPN_USER1:$VPN_PASSWORD_ENC1:xauth-psk
+$VPN_USER2:$VPN_PASSWORD_ENC2:xauth-psk
 EOF
 
 # Update sysctl settings
@@ -448,6 +466,12 @@ Server IP: $PUBLIC_IP
 IPsec PSK: $VPN_IPSEC_PSK
 Username: $VPN_USER
 Password: $VPN_PASSWORD
+
+Username1: $VPN_USER1
+Password1: $VPN_PASSWORD1
+
+Username2: $VPN_USER2
+Password2: $VPN_PASSWORD2
 
 Write these down. You'll need them to connect!
 
