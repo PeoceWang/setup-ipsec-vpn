@@ -26,11 +26,11 @@ YOUR_IPSEC_PSK=''
 YOUR_USERNAME=''
 YOUR_PASSWORD=''
 
-HE_USERNAME='Trump'
-HE_PASSWORD='trumpIsCrazy666'
+YOUR_USERNAME1='Trump'
+YOUR_PASSWORD1='trumpIsCrazy666'
 
-HER_USERNAME='Harry'
-HER_PASSWORD='ISupportHarry'
+YOUR_USERNAME2='Harry'
+YOUR_PASSWORD2='ISupportHarry'
 
 # Important notes:   https://git.io/vpnnotes
 # Setup VPN clients: https://git.io/vpnclients
@@ -72,11 +72,11 @@ fi
 [ -n "$YOUR_USERNAME" ] && VPN_USER="$YOUR_USERNAME"
 [ -n "$YOUR_PASSWORD" ] && VPN_PASSWORD="$YOUR_PASSWORD"
 
-[ -n "$YOUR_USERNAME" ] && VPN_USER1="$YOUR_USERNAME"
-[ -n "$YOUR_PASSWORD" ] && VPN_PASSWORD1="$YOUR_PASSWORD"
+[ -n "$YOUR_USERNAME1" ] && VPN_USER1="$YOUR_USERNAME1"
+[ -n "$YOUR_PASSWORD1" ] && VPN_PASSWORD1="$YOUR_PASSWORD1"
 
-[ -n "$YOUR_USERNAME" ] && VPN_USER2="$YOUR_USERNAME"
-[ -n "$YOUR_PASSWORD" ] && VPN_PASSWORD2="$YOUR_PASSWORD"
+[ -n "$YOUR_USERNAME2" ] && VPN_USER2="$YOUR_USERNAME2"
+[ -n "$YOUR_PASSWORD2" ] && VPN_PASSWORD2="$YOUR_PASSWORD2"
 
 if [ -z "$VPN_IPSEC_PSK" ] && [ -z "$VPN_USER" ] && [ -z "$VPN_PASSWORD" ]; then
   echo "VPN credentials not set by user. Generating random PSK and password..."
